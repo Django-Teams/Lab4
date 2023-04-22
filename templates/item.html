@@ -1,10 +1,3 @@
-<!--
-Очікується наступний контекст:
-    dish
-    ingredients
-    max_dishes
--->
-
 {% extends "common/base.html" %}
 
 {% block title %}
@@ -21,12 +14,12 @@
     <br>
     <p class="item-desc">{{ dish["desc"] }}</p>
     <hr class="mt-0 mr-4"></ht>
-    <form class="centered" action="/add2cart">
+    <form class="centered" action="/shop/item/add">
         <h3>Замовити</h3>
         <input type="hidden" id="add2cart-id" name="id" value="{{ dish_id }}">
         <input type="number" name="amount" id="add2cart-amount" min="1" max="{{ max_dishes }}" placeholder="Кількість">
         <b><p id="add2cart-cost">Ціна: 0</p></b>
-        <input type="submit" id="add2cart-submit" value="Замовити">
+        <input type="submit" id="add2cart-submit" value="Замовити" disabled>
     </form>
 </content>
 {% endblock %}

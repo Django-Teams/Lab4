@@ -10,9 +10,6 @@ eXes.forEach(X => {
             }),
             success: () => {
                 window.location.href = `${window.location.origin}/shop`
-            },
-            error: () => {
-                alert(X.id)
             }
         })
     })

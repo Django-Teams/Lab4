@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, jsonify
+from flask import Flask, request, render_template, redirect
 from sys import maxsize
 
 import clearly_not_a_db as not_db
@@ -6,12 +6,14 @@ import consts
 
 app = Flask('lab4')
 
+# adding functions to the jinja templates
 app.jinja_env.filters['zip'] = zip
 app.jinja_env.filters['len'] = len
 
 
 @app.route('/')
 def index():
+    """!!! does not have its own page !!!"""
     return redirect("/home")
 
 @app.route('/home')
@@ -37,6 +39,7 @@ def shop_item_dish(dish_id:int):
     max_dishes = maxsize
     cost_per_dish = 0
     
+    # calc each dish's cost
     for ingredient in dish["recipe"].keys():
         curr_ingredients.append(ingredients[ingredient])
         
@@ -59,7 +62,8 @@ def shop_item_dish(dish_id:int):
                            cost_per_dish=cost_per_dish)
 
 @app.route('/shop/item/add')
-def cart_add():
+def shop_item_add():
+    """!!! does not have its own page !!!"""
     dish_id = int(request.args.get("id"))
     amount = int(request.args.get("amount"))
     not_db.current_orders.append([not_db.dishes[dish_id], amount])
@@ -78,6 +82,7 @@ def cart():
             cost = ingredients[k]["price"]
             amount = recipe[k]
             ingredient_cost += round(amount * cost * consts.NAVAR, 2)
+        ingredient_cost *= order[1]
         total_cost += ingredient_cost
         # order[2] = ingredient_cost
         order.append(ingredient_cost)
@@ -88,6 +93,7 @@ def cart():
 
 @app.route('/order/del', methods=["POST"])
 def order_del():
+    """!!! does not have its own page !!!"""
     id = request.json["value"]
     del not_db.current_orders[id]
     return ""

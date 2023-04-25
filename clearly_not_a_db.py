@@ -1,3 +1,8 @@
+"""
+First DBMS was invented in 1960.
+People before 1960 were like:
+"""
+
 dishes = (
     # example
     # {
